@@ -1,0 +1,1 @@
+{"version":3,"file":"UnknownRequestMappingException.js","sourceRoot":"","sources":["../../../src/exceptions/UnknownRequestMappingException.ts"],"names":[],"mappings":";;AAAA,yDAAsD;AAEzC,QAAA,uBAAuB,GAAG,+GAA+G,CAAC;AAEvJ,MAAa,8BAA+B,SAAQ,mCAAgB;IAClE;QACE,KAAK,CAAC,+BAAuB,CAAC,CAAC;IACjC,CAAC;CACF;AAJD,wEAIC"}

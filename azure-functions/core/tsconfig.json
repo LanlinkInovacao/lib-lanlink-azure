@@ -1,0 +1,15 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "noImplicitAny": true,
+    "emitDecoratorMetadata":true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "src/*.ts",
+    "src/**/*.ts",
+    "__TESTS__/*.ts",
+    "__TESTS__/**/*.ts"
+  ]
+}

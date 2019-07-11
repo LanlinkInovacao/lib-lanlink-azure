@@ -1,0 +1,76 @@
+{
+  "name": "@lanlink/azure-functions",
+  "version": "0.0.12",
+  "description": "Framework for easy testing and use of Azure Functions.",
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "jest --collect-coverage --runInBand",
+    "test:debug": "node --inspect ./node_modules/.bin/jest --runInBand --config jest.config.json",
+    "check": "",
+    "clean": "",
+    "compile": "tsc",
+    "fix": "",
+    "prepare": "npm run clear && npm run cti && npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check",
+    "prestart": "npm run prepare",
+    "start": "set NODE_ENV=development&& node dist/index.js",
+    "debug": "npm run tsc",
+    "build": "set NODE_ENV=production && npm run clear && npm run cti && npm run compile",
+    "prepublishOnly": "npm run build",
+    "preversion": "npm run check",
+    "cti": "cti create -n ./src",
+    "clear": "rimraf dist",
+    "test-one": "jest ./__TESTS__/unit/HttpTriggerManager.spec.ts"
+  },
+  "author": "Welson Play Queiroz Silva <welsonplayqs@gmail.com>",
+  "keywords": [
+    "azure functions",
+    "unit test"
+  ],
+  "bugs": {
+    "url": "https://github.com/LanlinkInovacao/llk-azure-functions/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LanlinkInovacao/llk-azure-functions.git"
+  },
+  "homepage": "https://github.com/LanlinkInovacao/llk-azure-functions#readme",
+  "license": "ISC",
+  "devDependencies": {
+    "@azure/functions": "^1.0.1-beta2",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.5",
+    "@types/reflect-metadata": "^0.1.0",
+    "copyfiles": "^2.1.0",
+    "create-ts-index": "^1.8.0",
+    "gts": "^0.9.0",
+    "jest": "^24.7.1",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
+    "tslint-jest": "^1.0.5",
+    "typescript": "^3.4.3"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.134",
+    "iterare": "^1.2.0",
+    "lodash": "^4.17.11",
+    "reflect-metadata": "^0.1.13"
+  },
+  "files": [
+    "dist"
+  ],
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "testRegex": "^.+\\.spec\\.ts$"
+  }
+}

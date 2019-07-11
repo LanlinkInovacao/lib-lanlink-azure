@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "tslint-jest",
+    "gts/tslint.json"
+  ],
+  "rules": { "no-any": false, "no-default-export": false }
+}
