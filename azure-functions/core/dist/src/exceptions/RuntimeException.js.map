@@ -1,1 +1,0 @@
-{"version":3,"file":"RuntimeException.js","sourceRoot":"","sources":["../../../src/exceptions/RuntimeException.ts"],"names":[],"mappings":";;AAOA,MAAa,gBAAiB,SAAQ,KAAK;IACzC,YAA6B,MAAM,EAAE;QACnC,KAAK,CAAC,GAAG,CAAC,CAAC;QADgB,QAAG,GAAH,GAAG,CAAK;IAErC,CAAC;IAED,IAAI;QACF,OAAO,IAAI,CAAC,GAAG,CAAC;IAClB,CAAC;CACF;AARD,4CAQC"}

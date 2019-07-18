@@ -15,5 +15,10 @@
     "postRushBuild": []
   },
   "variants": [],
-  "projects": []
+  "projects": [
+    {
+      "packageName": "@lanlink/azure-functions",
+      "projectFolder": "azure-functions"
+    }
+  ]
 }
