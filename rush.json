@@ -18,7 +18,7 @@
   "projects": [
     {
       "packageName": "@lanlink/azure-functions",
-      "projectFolder": "azure-functions"
+      "projectFolder": "azure-functions/core"
     }
   ]
 }

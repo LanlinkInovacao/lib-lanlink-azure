@@ -1,0 +1,4 @@
+{
+  "extends": ["tslint-jest"],
+  "rules": { "no-any": false, "no-default-export": false }
+}
