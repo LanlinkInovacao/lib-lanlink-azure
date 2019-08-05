@@ -27,16 +27,16 @@
 // import { RouterExecutionContext } from "./router-execution-context";
 // import { RouterProxy, RouterProxyCallback } from "./router-proxy";
 
-import { Context } from "../Context";
-import { HttpMethodInternal } from "../HttpRequest";
-import { MetadataScanner } from "../utils/MetadataScanner";
-import { UnknownRequestMappingException } from "../exceptions/UnknownRequestMappingException";
+import { Context } from "../../Context";
+import { HttpMethodInternal } from "../../HttpRequest";
+import { MetadataScanner } from "../../utils/MetadataScanner";
+import { UnknownRequestMappingException } from "../../exceptions/UnknownRequestMappingException";
 
 import {
   METADATAKEY_HTTPTRIGGER_PATH,
   METADATAKEY_HTTPTRIGGER_METHOD
-} from "./Constants";
-import { isUndefined, validatePath, isString } from "../utils/Utils";
+} from "../Constants";
+import { isUndefined, validatePath, isString } from "../../utils/Utils";
 
 interface RoutePathProperties {
   path: string[];

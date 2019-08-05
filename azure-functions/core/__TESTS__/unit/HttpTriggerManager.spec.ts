@@ -1,4 +1,4 @@
-import { HttpTriggerManager } from "../../src/triggers/HttpTriggerManager";
+import { HttpTriggerManager } from "../../src/triggers/http/HttpTriggerManager";
 
 import { UserController } from "./UserController";
 import { HttpTriggerMock } from "../../src/mock/HttpTriggerMock";

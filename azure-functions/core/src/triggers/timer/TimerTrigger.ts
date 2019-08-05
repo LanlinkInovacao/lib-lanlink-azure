@@ -1,23 +1,17 @@
-import { Context } from "../../Context";
-import { TimerOptions } from "./TimerOptions";
 import {
   ERROR_DUPLICATE_TRIGGER,
   METADATAKEY_TRIGGER,
   METADATAKEY_TIMERTRIGGER_RUN,
   ERROR_DUPLICATE_TIMERTRIGGER_RUN
 } from "../Constants";
-import { setTriggerMetadata } from "../Utils";
 
-/**
- * Interface for creation of the time trigger class.
- */
-// export interface TimerTrigger {
-//   run(
-//     context: Context,
-//     timerOptions: TimerOptions,
-//     ...args: any[]
-//   ): Promise<any | void> | void;
-// }
+import { setTriggerMetadata } from "../Utils";
+import { Context } from "../../Context";
+import { TimerOptions } from "./TimerOptions";
+
+export interface ITimerTrigger {
+  run(context: Context, timer: TimerOptions): Promise<void>;
+}
 
 export function TimerTrigger(): ClassDecorator {
   return (target: {}) => {

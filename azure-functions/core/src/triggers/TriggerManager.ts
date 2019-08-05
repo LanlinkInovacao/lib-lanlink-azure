@@ -5,7 +5,7 @@ import {
 } from "../bindings/BindingDefinition";
 import { Context } from "../Context";
 
-import { HttpTriggerManager } from "./HttpTriggerManager";
+import { HttpTriggerManager } from "./http/HttpTriggerManager";
 import { TimerTriggerManager } from "./timer/TimerTriggerManager";
 
 export class TriggerManager {

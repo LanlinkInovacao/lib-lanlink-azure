@@ -1,11 +1,11 @@
 export interface ScheduleStatus {
-  last: string;
-  lastUpdated: string;
-  next: string;
+  Last: string;
+  LastUpdated: string;
+  Next: string;
 }
 
 export interface TimerOptions {
-  schedule: {};
-  scheduleStatus: ScheduleStatus;
-  isPastDue: boolean;
+  Schedule: {};
+  ScheduleStatus: ScheduleStatus;
+  IsPastDue: boolean;
 }
