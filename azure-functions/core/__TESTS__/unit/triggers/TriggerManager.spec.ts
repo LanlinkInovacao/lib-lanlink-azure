@@ -1,8 +1,9 @@
-import { BindingDefinitionType } from "../../src/bindings/BindingDefinition";
-import { Context } from "../../src/Context";
-import { TriggerManager } from "../../src/triggers/TriggerManager";
+import { BindingDefinitionType } from "../../../src/bindings/BindingDefinition";
+import { Context } from "../../../src/Context";
+import { TriggerManager } from "../../../src/triggers/TriggerManager";
 
-import { UserController } from "./UserController";
+import { UserController } from "../UserController";
+import { AzureFunctionsTriggerManager } from "../../../src";
 
 describe("HttpTriggerManager", () => {
   it("Validate if triggers are being added correctly.", () => {
@@ -42,8 +43,9 @@ describe("HttpTriggerManager", () => {
       ): Promise<any | void> | void => {
         expect(context).toEqual(context);
         done();
-      }
-    };
+      },
+      resolver: instance => {}
+    } as AzureFunctionsTriggerManager;
 
     triggerManager.run(UserController, context);
   });

@@ -1,5 +1,5 @@
-import {HttpMethod} from '../../src/HttpRequest';
-import {HttpTriggerMock} from '../../src/mock/HttpTriggerMock';
+import {HttpMethod} from '../../../../src/HttpRequest';
+import {HttpTriggerMock} from '../../../../src/mock/HttpTriggerMock';
 
 
 describe('AzureFunctionExecutableMock', () => {

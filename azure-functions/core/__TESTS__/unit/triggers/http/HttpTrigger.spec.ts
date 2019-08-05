@@ -13,7 +13,7 @@ import {
   Request,
   Body,
   Query
-} from "../../src/triggers/http/HttpTrigger";
+} from "../../../../src/triggers/http/HttpTrigger";
 import {
   ERROR_DUPLICATE_TRIGGER,
   METADATAKEY_TRIGGER,
@@ -21,8 +21,8 @@ import {
   METADATAKEY_HTTPTRIGGER_METHOD,
   METADATAKEY_HTTPTRIGGER_PATH,
   METADATAKEY_HTTPTRIGGER_ARGS
-} from "../../src/triggers/Constants";
-import { HttpMethod } from "../../src";
+} from "../../../../src/triggers/Constants";
+import { HttpMethod } from "../../../../src";
 
 describe("HttpTrigger.@httpTrigger()", () => {
   it("Validates the operation of the decorator without parameter.", async done => {

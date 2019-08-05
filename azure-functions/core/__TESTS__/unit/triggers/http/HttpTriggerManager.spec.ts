@@ -1,8 +1,8 @@
-import { HttpTriggerManager } from "../../src/triggers/http/HttpTriggerManager";
+import { HttpTriggerManager } from "../../../../src/triggers/http/HttpTriggerManager";
 
-import { UserController } from "./UserController";
-import { HttpTriggerMock } from "../../src/mock/HttpTriggerMock";
-import { Get, Param } from "../../src/triggers/http/HttpTrigger";
+import { UserController } from "../../UserController";
+import { HttpTriggerMock } from "../../../../src/mock/HttpTriggerMock";
+import { Get, Param } from "../../../../src/triggers/http/HttpTrigger";
 
 describe("HttpTriggerManager", () => {
   it("validates the execution of choose best method.", async done => {
