@@ -3,11 +3,15 @@
   "rushVersion": "5.10.0",
   "pnpmVersion": "2.15.1",
 
-  "pnpmOptions": {},
+  "pnpmOptions": {
+    "strictPeerDependencies": true
+  },
   "nodeSupportedVersionRange": ">=10.13.0 <11.0.0",
   "gitPolicy": {},
-
-  "repository": {},
+  "ensureConsistentVersions": true,
+  "repository": {
+    "url": "https://github.com/Microsoft/rush-example"
+  },
   "eventHooks": {
     "preRushInstall": [],
     "postRushInstall": [],

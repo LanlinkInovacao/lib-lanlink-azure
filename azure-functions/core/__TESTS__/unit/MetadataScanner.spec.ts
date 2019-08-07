@@ -3,8 +3,6 @@ import { BindingDefinitionType } from "../../src/bindings/BindingDefinition";
 import { Context } from "../../src/Context";
 import { TriggerManager } from "../../src/triggers/TriggerManager";
 
-import { UserController } from "./UserController";
-
 describe("Bindings.connect", () => {
   class Parent {
     constructor() {}

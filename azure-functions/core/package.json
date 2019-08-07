@@ -23,9 +23,9 @@
     "preversion": "npm run check",
     "cti": "cti create -n ./src",
     "clear": "rimraf dist",
-    "test-one": "jest ./__TESTS__/unit/triggers/timer/TimerTriggerManager.spec.ts"
+    "test-one": "jest ./__TESTS__/unit/triggers/http/HttpTriggerManager.spec.ts"
   },
-  "author": "Welson Play Queiroz Silva <welsonplayqs@gmail.com>",
+  "author": "Welson Play <welson.play@lanlink.com.br>",
   "keywords": [
     "azure functions",
     "unit test"

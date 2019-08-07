@@ -41,8 +41,9 @@ import { isUndefined, validatePath, isString } from "../../utils/Utils";
 interface RoutePathProperties {
   path: string[];
   requestMethod: HttpMethodInternal;
-  // context: Context;
+  callback: Function;
   methodName: string;
+  context: Context;
 }
 
 export class RouterExplorer {
@@ -56,38 +57,23 @@ export class RouterExplorer {
     private readonly context: Context
   ) {}
 
-  explore(instance: {}, basePath: string) {
+  explore(instance: {}) {
     const routerPaths = this.scanForPaths(instance);
-    this.applyPathsToRouterProxy(routerPaths, instance, basePath);
+    this.applyPathsToRouterProxy(routerPaths, instance);
   }
 
-  applyPathsToRouterProxy(
-    routePaths: RoutePathProperties[],
-    instance: {},
-    basePath: string
-  ) {
+  applyPathsToRouterProxy(routePaths: RoutePathProperties[], instance: {}) {
     (routePaths || []).forEach(pathProperties => {
-      // const { path, requestMethod } = pathProperties;
-      this.applyCallbackToRouter(pathProperties, instance, basePath);
-      // path.forEach(p =>
-      //   // this.logger.log(ROUTE_MAPPED_MESSAGE(p, requestMethod)),
-      // );
+      this.applyCallbackToRouter(pathProperties);
     });
   }
 
-  private applyCallbackToRouter(
-    pathProperties: RoutePathProperties,
-    instance: {},
-    basePath: string
-  ) {
-    const { path: paths, requestMethod, methodName } = pathProperties;
-
-    const stripSlash = (str: string) =>
-      str[str.length - 1] === "/" ? str.slice(0, str.length - 1) : str;
-
+  private applyCallbackToRouter(pathProperties: RoutePathProperties) {
+    // const { path: paths, requestMethod, methodName } = pathProperties;
+    // const stripSlash = (str: string) =>
+    //   str[str.length - 1] === "/" ? str.slice(0, str.length - 1) : str;
     // const isRequestScoped = !instanceWrapper.isDependencyTreeStatic();
     // const module = this.container.getModuleByKey(moduleKey);
-
     // if (isRequestScoped) {
     //   const handler = this.createRequestScopedHandler(
     //     instanceWrapper,
@@ -96,7 +82,6 @@ export class RouterExplorer {
     //     moduleKey,
     //     methodName
     //   );
-
     //   paths.forEach(path => {
     //     const fullPath = stripSlash(basePath) + path;
     //     routerMethod(stripSlash(fullPath) || "/", handler);
@@ -129,26 +114,33 @@ export class RouterExplorer {
     return validatePath(path);
   }
 
-  scanForPaths(instance: {}, prototype?: any): RoutePathProperties[] {
+  scanForPaths(
+    context: Context,
+    instance: {},
+    prototype?: any
+  ): RoutePathProperties[] {
     const instancePrototype = isUndefined(prototype)
       ? Object.getPrototypeOf(instance)
       : prototype;
 
     return this.metadataScanner.scanFromPrototype<RoutePathProperties>(
       instancePrototype,
-      method => this.exploreMethodMetadata(instancePrototype, method)
+      method => this.exploreMethodMetadata(context, instancePrototype, method)
     );
   }
 
   exploreMethodMetadata(
+    context: Context,
     instancePrototype: any,
     methodName: string
   ): RoutePathProperties {
     const targetCallback = instancePrototype[methodName];
+
     const routePath: string | string[] = Reflect.getMetadata(
       METADATAKEY_HTTPTRIGGER_PATH,
       targetCallback
     );
+
     // if (isUndefined(routePath)) {
     //   return null;
     // }
@@ -162,8 +154,9 @@ export class RouterExplorer {
     return {
       path,
       requestMethod,
-
-      methodName
+      methodName,
+      context,
+      callback: targetCallback
     };
   }
 

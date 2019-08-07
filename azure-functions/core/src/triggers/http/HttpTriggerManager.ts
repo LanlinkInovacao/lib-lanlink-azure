@@ -3,42 +3,86 @@ import { Context } from "../../Context";
 import { HttpMethodInternal } from "../../HttpRequest";
 import { RouterExplorer } from "./RouterExplorer";
 import { MetadataScanner } from "../../utils/MetadataScanner";
+import {
+  METADATAKEY_HTTPTRIGGER_METHOD,
+  METADATAKEY_HTTPTRIGGER_PATH
+} from "../Constants";
+import { isUndefined, isString, validatePath } from "../../utils/Utils";
+import { UnknownRequestMappingException } from "../../exceptions";
 
-export interface RoutePathProperties {
+interface RoutePathProperties {
   path: string[];
   requestMethod: HttpMethodInternal;
-  context: Context;
+  callback: Function;
   methodName: string;
+  context: Context;
 }
 
 export class HttpTriggerManager extends AzureFunctionsTriggerManager {
-  
-  
-  // run<T>(instance: new () => T, context: Context, args: any[]): void {
-  //   const request = context.req;
-  //   if (request === undefined) {
-  //     return;
-  //   }
+  private metadataScanner: MetadataScanner = new MetadataScanner();
 
-  //   const routerBuilder = new RouterExplorer(new MetadataScanner(), context);
+  //https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2#optional-uri-parameters-and-default-values
+  resolver(instance: any) {}
 
-  //   this.resolve(routerBuilder, instance, context, context.req!.url);
-  // }
+  scanForPaths(
+    context: Context,
+    instance: {},
+    prototype?: any
+  ): RoutePathProperties[] {
+    const instancePrototype = isUndefined(prototype)
+      ? Object.getPrototypeOf(instance)
+      : prototype;
 
-  resolver(instance: any) {
-    throw new Error("Method not implemented.");
+    return this.metadataScanner.scanFromPrototype<RoutePathProperties>(
+      instancePrototype,
+      method => this.exploreMethodMetadata(context, instancePrototype, method)
+    );
+  }
+
+  exploreMethodMetadata(
+    context: Context,
+    instancePrototype: any,
+    methodName: string
+  ): RoutePathProperties {
+    const targetCallback = instancePrototype[methodName];
+
+    const routePath: string | string[] = Reflect.getMetadata(
+      METADATAKEY_HTTPTRIGGER_PATH,
+      targetCallback
+    );
+
+    const requestMethod: HttpMethodInternal = Reflect.getMetadata(
+      METADATAKEY_HTTPTRIGGER_METHOD,
+      targetCallback
+    );
+
+    const path = isString(routePath)
+      ? [this.validateRoutePath(routePath)]
+      : routePath.map(p => this.validateRoutePath(p));
+    return {
+      path,
+      requestMethod,
+      methodName,
+      context,
+      callback: targetCallback
+    };
+  }
+
+  validateRoutePath(path: string): string {
+    if (isUndefined(path)) {
+      throw new UnknownRequestMappingException();
+    }
+    return validatePath(path);
   }
 
   // private resolve<T>(
   //   routerBuilder: RouterExplorer,
   //   instance: new () => T,
-  //   applicationRef: Context,
-  //   basePath: string
   // ) {
-  //   const path = routerBuilder.exploreMethodMetadata(instance, basePath);
+  //   // const path = routerBuilder.exploreMethodMetadata(instance, basePath);
 
   //   // this.logger.log(CONTROLLER_MAPPING_MESSAGE(controllerName, path));
-  //   routerBuilder.explore(instance, basePath);
+  //   // routerBuilder.explore(instance, basePath);
   // }
 
   // chooseBestMethod<T>(

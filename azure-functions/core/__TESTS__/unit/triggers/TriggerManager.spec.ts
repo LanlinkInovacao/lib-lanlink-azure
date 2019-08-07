@@ -2,10 +2,16 @@ import { BindingDefinitionType } from "../../../src/bindings/BindingDefinition";
 import { Context } from "../../../src/Context";
 import { TriggerManager } from "../../../src/triggers/TriggerManager";
 
-import { UserController } from "../UserController";
-import { AzureFunctionsTriggerManager } from "../../../src";
+import { AzureFunctionsTriggerManager, Get } from "../../../src";
 
 describe("HttpTriggerManager", () => {
+  class UserController {
+    @Get()
+    async getUsers(): Promise<[]> {
+      return [];
+    }
+  }
+
   it("Validate if triggers are being added correctly.", () => {
     const triggerManager = new TriggerManager();
     const triggers = triggerManager.triggers;
